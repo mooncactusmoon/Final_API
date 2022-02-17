@@ -1,0 +1,18 @@
+*{
+    font-family: Microsoft JhengHei; 
+    
+}
+#top{
+    color: rgb(2, 36, 22);
+    padding: 10px 10px;
+    opacity: .7;
+    position: fixed;
+    left: 15px;
+    bottom: 30px;
+    z-index: 1000;
+    font-size: 20px;
+}
+footer{
+    background-color: rgb(47, 70, 57);
+    color:rgb(210, 241, 224);
+}
