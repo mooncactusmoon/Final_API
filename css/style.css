@@ -1,9 +1,15 @@
-*{
-    font-family: Microsoft JhengHei; 
+* {
+    font-family: Microsoft JhengHei;
     scroll-behavior: smooth;
 }
-#top{
-    color: rgb(2, 36, 22);
+
+body {
+    background-image: url("../img/bg.jpg");
+}
+nav{
+    color:rgb(12, 43, 37);
+}
+#top {
     padding: 10px 10px;
     opacity: .7;
     position: fixed;
@@ -12,7 +18,8 @@
     z-index: 1000;
     font-size: 20px;
 }
-footer{
+
+footer {
     background-color: rgb(47, 70, 57);
-    color:rgb(210, 241, 224);
+    color: rgb(210, 241, 224);
 }
