@@ -27,3 +27,5 @@
 
 ## 繳交方式
 完整代碼上傳 Github ClassRoom 至指定 repository，並於說明欄位提供主機之預覽連結（前項第 6 點動作）
+
+連結網址 : http://220.128.133.15/s1100403/datatable_api/
