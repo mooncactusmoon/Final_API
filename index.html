@@ -31,7 +31,7 @@
 <body>
    <div id="loading"></div>
    <!-- nav start -->
-   <div class="container">
+   <div class="container-fluid">
       <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgb(128, 153, 136);">
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,11 +55,11 @@
    <!-- nav end -->
    <!-- back top -->
    <div id="top">
-      <a href="#" style="color: rgb(2, 36, 22);"><i class="fas fa-hand-point-up ">TOP</i></a>
+      <a href="#"><i class="fas fa-hand-point-up ">TOP</i></a>
    </div>
    <!-- back top end -->
    <!-- carousel start -->
-   <div class="container">
+   <div class="container-fluid">
       <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
          <ol class="carousel-indicators">
             <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -105,14 +105,14 @@
 <!-- main -->
 <div class="container">
    <div class="row mt-3">
-      <div class="col-12">
+      <div class="col-12 mx-auto">
          <table id="table_id" class="table table-success table-striped">
-            <thead>
+            <thead class="text-center">
                <tr>
                    <th style="width:2%"></th>
                    <th style="width:20%">名稱</th>
-                   <th style="width:8%">開放時間</th>
-                   <th style="width:70%">介紹</th>
+                   <th style="width:18%">開放時間</th>
+                   <th style="width:60%">介紹</th>
                </tr>
            </thead>
            <tbody>
@@ -120,10 +120,11 @@
          </table>
       </div>
 
+   </div>
 </div>
 <!-- main end -->
    <!-- footer -->
-   <footer class="container">
+<footer class="container-fluid">
       <div class="row">
          <div class="col-12 h6 p-3 text-center">
             <p>&copy; Cactus月 2022 <br>
@@ -131,7 +132,7 @@
             </p>
          </div>
       </div>
-   </footer>
+</footer>
    <!-- footer end -->
 
    <!-- 先載入 -->
@@ -156,7 +157,7 @@
    <script>
       $(document).ready(function () {
          $("#loading").addClass("loading");
-         setTimeout(load, 800);
+         setTimeout(load, 1200);
          function load(){
             $("#loading").removeClass("loading");
          }
@@ -175,10 +176,10 @@
                      <td>${i+1}</td>
                      <td><img src="${data[i]['Photo']}" class='my-5' style="width:100%">
                         <p class=" text-center h5"><a href="${data[i]['Url']}" target="_blank">${data[i]['Name']}</p></a></td>
-                     <td style='color:#706c6c'>${data[i]['OpenHours']}</td>
-                     <td><span style='color:#3042ab;'>
-                        <i class="fa-solid fa-location-dot"></i>${data[i]['City']},${data[i]['Address']}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                     <span style='color:#691707;'><i class="fa-solid fa-square-phone"></i>${data[i]['Tel']}</span>
+                     <td style='color:#555'>${data[i]['OpenHours']}</td>
+                     <td><span style='color:#3042ab;font-size:20px'>
+                        <i class="fa-solid fa-location-dot"></i>${data[i]['City']},${data[i]['Address']}</span><br>
+                     <span style='color:#691707;font-size:18px'><i class="fa-solid fa-square-phone"></i>${data[i]['Tel']}</span>
                      <p class="mt-2">${data[i]['HostWords']}</p></td>
                   </tr>
                     `);
