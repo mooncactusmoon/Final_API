@@ -29,6 +29,7 @@
 </head>
 
 <body>
+   <div id="loading"></div>
    <!-- nav start -->
    <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgb(128, 153, 136);">
@@ -154,6 +155,11 @@
 
    <script>
       $(document).ready(function () {
+         $("#loading").addClass("loading");
+         setTimeout(load, 800);
+         function load(){
+            $("#loading").removeClass("loading");
+         }
          $.ajax({
             type: "post",
             url: "https://data.coa.gov.tw/OpenData/Service/OpenData/ODwsv/ODwsvTravelStay.aspx",
