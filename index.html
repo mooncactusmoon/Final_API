@@ -113,7 +113,7 @@
                    <th style="width:2%"></th>
                    <th style="width:20%">名稱</th>
                    <th style="width:18%">開放時間</th>
-                   <th style="width:60%">介紹</th>
+                   <th style="width:60%">聯絡資訊/介紹</th>
                </tr>
            </thead>
            <tbody>
@@ -171,23 +171,32 @@
                console.log('data', data);
 
                for(let i = 0; i< data.length;i++){
-
+                  let str=data[i]['HostWords'].substr(0,50);
+                  console.log('str',str);
                   $('tbody').append(`
                   <tr>
                      <td>${i+1}</td>
                      <td><img src="${data[i]['Photo']}" class='my-5' style="width:100%">
                         <p class=" text-center h5"><a href="${data[i]['Url']}" target="_blank">${data[i]['Name']}</p></a></td>
                      <td style='color:#555'>${data[i]['OpenHours']}</td>
-                     <td><span style='color:#3042ab;font-size:20px'>
+                     <td class='p-3'><span style='color:#3042ab;font-size:20px'>
                         <i class="fa-solid fa-location-dot"></i>${data[i]['City']},${data[i]['Address']}</span><br>
                      <span style='color:#691707;font-size:18px'><i class="fa-solid fa-square-phone"></i>${data[i]['Tel']}</span>
-                     <p class="mt-2">${data[i]['HostWords']}</p></td>
+                     <br><div class="switch">
+                     <p class="mt-2 t-short" style="font-size:18px">${str}<span style='color:#d44255'>...見詳情</span></p>
+                     <p class="mt-2 t-full" style="display:none;font-size:18px"><span style='color:#d44255'>收起詳情</span><br>${data[i]['HostWords']}</p></div>
+                     </td>
                   </tr>
                     `);
                }
+               $(".switch").on("click", function() {
+            $(this).parent().find(".t-short,.t-full").toggle();
+         })
                $('#table_id').DataTable();
             }
          })
+
+        
       });
    </script>
 </body>
