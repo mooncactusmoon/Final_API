@@ -32,12 +32,51 @@
          width:120px;
          height:90px;
       }
+      .sliders img{
+         height: 300px;
+      }
+      .img-header{
+         position: absolute;
+         top:0;
+         left: 0;
+         background-color: rgba(200,200,200,0.6);
+         text-align: center;
+         font-weight: bolder;
+         font-size: 1.2em;
+         width: 100%;
+         padding: 10px 0;
+         text-shadow: 0 0 5px grey;
+      }
+      #paginator {
+         margin: 20px auto;
+         text-align: center;
+      }
+      #paginator a{
+         padding: 3px;
+         border: 1px solid grey;
+         margin-left: -1px;
+
+      }
+      #paginator a:hover{
+         background: lightcyan;
+      }
+      .sel-page{
+         background-color: rgb(201, 235, 218);
+      }
    </style>
+   <!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 </head>
 
 <body>
-   <div id="loading"></div>
-   <div class="container" id="api">
+
+   <div class="container" id="api">   
+      <div class="jumbotron">
+         <div class="sliders"></div>
+
+    </div>
       <select id="city"></select>
       <div id="paginator"></div>
       <table id="list" class="table">
@@ -85,7 +124,7 @@
    <script type="text/javascript" charset="utf8"
       src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
    <!-- datatable end -->
-
+   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
    <script>
       //https://data.coa.gov.tw/OpenData/Service/OpenData/ODwsv/ODwsvTravelStay.aspx
       let city = new Array;
@@ -106,6 +145,7 @@
 
          //指定為全域變數
          source=res
+         $(".sliders").slick();
          
 
 
@@ -122,17 +162,32 @@
    
 
       })
+
+      function sliders(data){
+         $(".sliders").slick("unslick");
+         $(".sliders").html("");
+         data.forEach(item=>{
+            let img=`<div style='position:relative'>
+                        <div class='img-header'>${item.Name}</div>
+                        <img src='${item.Photo}'>
+                     </div>`
+            $(".sliders").append(img)
+         })
+
+         $(".sliders").slick({
+            dots:true,
+            infinite:true,
+            slidesToShow:2,
+            slidesToScroll:1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+         });
+      }
+
       function page(num){
          makeDataTable(source,'全部',num);
       }
 
-      /*function sortData(data,city){
-         let setArray=new Array();
-         city.forEach(c=>{
-            setArray.push(new Array());
-         })
-         console.log(setArray);
-      }*/
 
       function makeDropSelect(array){
          let option="";
@@ -146,7 +201,7 @@
         
  
          let tr,td,text,show; //宣告變數
-         let tabledate;
+         let tabledata;
          
          let cell=['Photo','Name','Address','Tel','OpenHours'];
          if(city=='全部'){
@@ -167,15 +222,16 @@
          let pages=Math.ceil(all/div); //幾頁
          let now=page; //當前頁數
          let start=(now-1)*div; //資料起始點
-         tabledate=show.slice(start,(start+div)); //slice結束點不算
+         tabledata=show.slice(start,(start+div)); //slice結束點不算
          let pg=""
-         // console.log(tabledate);
+         // console.log(tabledata);
          $("#paginator").html(function(){
             let prev=(now-1>0)?now-1:1;
             pg=`<a href='javascript:page(${prev})'> < </a>`;
 
             for(let i=1;i<=pages;i++){
-               pg=pg+`<a href='javascript:page(${i})'> &nbsp;${i}&nbsp; </a>`
+               let sel=(i==page)?'sel-page':'';
+               pg=pg+`<a href='javascript:page(${i})' class='${sel}'> &nbsp;${i}&nbsp; </a>`
             }
 
             let next=(now+1<=pages)?now+1:pages;
@@ -184,7 +240,7 @@
          })
 
 
-         tabledate.forEach(d=>{
+         tabledata.forEach(d=>{
 
             tr=document.createElement("tr"); //產生標籤
             
@@ -208,6 +264,9 @@
             $("#list tbody").append(tr);
 
          })
+
+         let sliderData=tabledata.slice(0,5);
+         sliders(sliderData);
       }
    </script>
 </body>
